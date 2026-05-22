@@ -6,15 +6,11 @@ plugins {
 	kotlin("jvm") version libs.versions.kotlin
 }
 
-version = libs.versions.invex
 group = "xyz.naomieow.invex"
 
 repositories {
-	// Add repositories to retrieve artifacts from in here.
-	// You should only use this when depending on other mods because
-	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
-	// for more information about repositories.
+	maven("https://api.modrinth.com/maven")
+	maven("https://maven.nucleoid.xyz")
 }
 
 loom {
@@ -35,14 +31,16 @@ dependencies {
 	modImplementation(libs.fabric.loader)
 	modImplementation(libs.fabric.api)
 	modImplementation(libs.fabric.kotlin)
+
+	modImplementation(libs.opc)?.let(::include)
+	modImplementation(libs.sgui)?.let(::include)
 }
 
 tasks.processResources {
-	val version = version
-	inputs.property("version", version)
+	inputs.property("version", libs.versions.invex)
 
 	filesMatching("fabric.mod.json") {
-		expand("version" to version)
+		expand("version" to libs.versions.invex)
 	}
 }
 

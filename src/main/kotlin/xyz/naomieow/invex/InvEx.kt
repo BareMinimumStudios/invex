@@ -1,15 +1,19 @@
 package xyz.naomieow.invex
 
 import net.fabricmc.api.ModInitializer
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import xyz.naomieow.invex.command.InvExCommands
 
-object InvEx : ModInitializer {
-    private val logger = LoggerFactory.getLogger("invex")
+const val MOD_ID: String = "invex"
+const val MOD_NAME: String = "InvEx"
 
+object InvEx :
+	ModInitializer,
+	Logger by LoggerFactory.getLogger(MOD_NAME)
+{
 	override fun onInitialize() {
-		// This code runs as soon as Minecraft is in a mod-load-ready state.
-		// However, some things (like resources) may still be uninitialized.
-		// Proceed with mild caution.
-		logger.info("Hello Fabric world!")
+		InvExCommands.registerCommands()
+		info("Peeping at player's inventories since 1984!")
 	}
 }
