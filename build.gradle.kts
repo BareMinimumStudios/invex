@@ -16,10 +16,11 @@ repositories {
 loom {
 	splitEnvironmentSourceSets()
 
+	accessWidenerPath = file("src/main/resources/invex.classtweaker")
+
 	mods {
 		register("invex") {
 			sourceSet(sourceSets.main.get())
-			sourceSet(sourceSets.getByName("client"))
 		}
 	}
 }

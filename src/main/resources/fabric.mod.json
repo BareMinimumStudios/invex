@@ -28,9 +28,7 @@
 			}
 		]
 	},
-	"mixins": [
-		"invex.mixins.json"
-	],
+	"mixins": [],
 	"depends": {
 		"fabricloader": ">=0.19.2",
 		"minecraft": "~1.20.1",

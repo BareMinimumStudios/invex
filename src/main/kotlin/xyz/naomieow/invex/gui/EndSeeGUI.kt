@@ -1,5 +1,6 @@
 package xyz.naomieow.invex.gui
 
+import eu.pb4.sgui.api.ClickType
 import eu.pb4.sgui.api.elements.GuiElementBuilder
 import eu.pb4.sgui.api.gui.SimpleGui
 import net.minecraft.network.chat.Component
@@ -7,6 +8,7 @@ import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.inventory.MenuType
 import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.Items
+import xyz.naomieow.invex.`invex$saveData`
 
 class EndSeeGUI(
     player: ServerPlayer,
@@ -20,7 +22,7 @@ class EndSeeGUI(
 
         for (i in target.enderChestInventory.containerSize..<slot) {
             setSlot(i, GuiElementBuilder()
-                .setItem(Items.LIGHT_GRAY_STAINED_GLASS_PANE)
+                .setItem(Items.LIGHT_BLUE_STAINED_GLASS_PANE)
                 .setName(Component.literal(""))
             )
         }
@@ -60,7 +62,7 @@ class EndSeeGUI(
 
         for (i in slot..<this.size) {
             setSlot(i, GuiElementBuilder()
-                .setItem(Items.LIGHT_GRAY_STAINED_GLASS_PANE)
+                .setItem(Items.LIGHT_BLUE_STAINED_GLASS_PANE)
                 .setName(Component.literal(""))
             )
         }
@@ -71,8 +73,11 @@ class EndSeeGUI(
     fun populate() {
         for (i in 0..<target.enderChestInventory.containerSize) {
             setSlotRedirect(i, Slot(target.enderChestInventory, i, 0, 0))
-//            var item = target.inventory.getItem(i)
-//            setSlot(i - 9, GuiElement(item, ::clickSlot))
         }
+    }
+
+    override fun onAnyClick(index: Int, type: ClickType?, action: net.minecraft.world.inventory.ClickType?): Boolean {
+        target.`invex$saveData`()
+        return super.onAnyClick(index, type, action)
     }
 }

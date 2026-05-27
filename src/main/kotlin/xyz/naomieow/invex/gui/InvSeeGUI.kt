@@ -1,5 +1,6 @@
 package xyz.naomieow.invex.gui
 
+import eu.pb4.sgui.api.ClickType
 import eu.pb4.sgui.api.elements.GuiElementBuilder
 import eu.pb4.sgui.api.gui.SimpleGui
 import net.minecraft.network.chat.Component
@@ -8,6 +9,7 @@ import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.inventory.MenuType
 import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.Items
+import xyz.naomieow.invex.`invex$saveData`
 
 class InvSeeGUI(
     player: ServerPlayer,
@@ -22,7 +24,7 @@ class InvSeeGUI(
 
         for (i in target.inventory.containerSize..<slot) {
             setSlot(i, GuiElementBuilder()
-                .setItem(Items.LIGHT_GRAY_STAINED_GLASS_PANE)
+                .setItem(Items.LIGHT_BLUE_STAINED_GLASS_PANE)
                 .setName(Component.literal(""))
             )
         }
@@ -62,13 +64,14 @@ class InvSeeGUI(
 
         for (i in slot..<this.size) {
             setSlot(i, GuiElementBuilder()
-                .setItem(Items.LIGHT_GRAY_STAINED_GLASS_PANE)
+                .setItem(Items.LIGHT_BLUE_STAINED_GLASS_PANE)
                 .setName(Component.literal(""))
             )
         }
 
         return super.open()
     }
+
     fun populate() {
         for (i in 0..<target.inventory.containerSize) {
             if (Inventory.isHotbarSlot(i)) {
@@ -79,8 +82,11 @@ class InvSeeGUI(
             }else {
                 setSlotRedirect(i - 9, Slot(target.inventory, i, 0, 0))
             }
-//            var item = target.inventory.getItem(i)
-//            setSlot(i - 9, GuiElement(item, ::clickSlot))
         }
+    }
+
+    override fun onAnyClick(index: Int, type: ClickType?, action: net.minecraft.world.inventory.ClickType?): Boolean {
+        target.`invex$saveData`()
+        return super.onAnyClick(index, type, action)
     }
 }
