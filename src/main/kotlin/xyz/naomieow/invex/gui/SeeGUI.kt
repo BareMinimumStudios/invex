@@ -106,11 +106,11 @@ abstract class SeeGUI(
     abstract fun populate()
 
     open fun showInventoryButton(): Boolean {
-        return Permissions.check(player, "invex.command.invsee")
+        return Permissions.check(player, "invex.command.invsee", 2)
     }
 
     open fun showEnderChestButton(): Boolean {
-        return Permissions.check(player, "invex.command.endsee")
+        return Permissions.check(player, "invex.command.endsee", 2)
     }
 
     override fun onAnyClick(index: Int, type: ClickType?, action: net.minecraft.world.inventory.ClickType?): Boolean {
@@ -119,7 +119,7 @@ abstract class SeeGUI(
     }
 
     open fun canModify(): Boolean {
-        return Permissions.check(target, InvExPermissions.IMMUNE_MODIFY)
+        return Permissions.check(target, InvExPermissions.IMMUNE_MODIFY, 3)
     }
 
     fun conditionalSlotRedirect(index: Int, slot: Slot, condition: Boolean) {

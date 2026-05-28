@@ -44,7 +44,7 @@ object SeeCommand {
                 }
             }
 
-            if (Permissions.check(targetPlayer, InvExPermissions.IMMUNE_VIEW)) {
+            if (Permissions.check(targetPlayer, InvExPermissions.IMMUNE_VIEW, 3)) {
                 ctx.source.sendFailure(Component.literal("Player ${targetPlayer.name} is immune to being viewed."))
                 return@cb 0
             }
