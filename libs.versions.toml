@@ -7,6 +7,7 @@ fabric-kotlin = "1.13.11+kotlin.2.3.21"
 fabric-api = "0.92.9+1.20.1"
 opc = "2.0.0+1.20.1-beta.4-fabric"
 sgui = "1.2.2+1.20"
+permissionsapi = "0.2-SNAPSHOT"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
@@ -15,3 +16,4 @@ fabric-api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fab
 fabric-loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric-loader" }
 opc = { module = "maven.modrinth:opc-directors-cut", version.ref = "opc" }
 sgui = { module = "eu.pb4:sgui", version.ref = "sgui" }
+permissionsapi = { module = "me.lucko:fabric-permissions-api", version.ref = "permissionsapi" }

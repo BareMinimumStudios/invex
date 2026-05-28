@@ -35,6 +35,7 @@ dependencies {
 
 	modImplementation(libs.opc)?.let(::include)
 	modImplementation(libs.sgui)?.let(::include)
+	modImplementation(libs.permissionsapi)?.let(::include)
 }
 
 tasks.processResources {

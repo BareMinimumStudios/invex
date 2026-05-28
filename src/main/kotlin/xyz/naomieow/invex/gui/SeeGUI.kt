@@ -1,14 +1,18 @@
 package xyz.naomieow.invex.gui
 
 import eu.pb4.sgui.api.ClickType
+import eu.pb4.sgui.api.elements.GuiElement
 import eu.pb4.sgui.api.elements.GuiElementBuilder
 import eu.pb4.sgui.api.gui.SimpleGui
+import me.lucko.fabric.api.permissions.v0.Permissions
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.Container
 import net.minecraft.world.inventory.MenuType
+import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.Items
 import xyz.naomieow.invex.InvEx
+import xyz.naomieow.invex.InvExPermissions
 import xyz.naomieow.invex.`invex$saveData`
 
 abstract class SeeGUI(
@@ -102,16 +106,28 @@ abstract class SeeGUI(
     abstract fun populate()
 
     open fun showInventoryButton(): Boolean {
-        return true
+        return Permissions.check(player, "invex.command.invsee")
     }
 
     open fun showEnderChestButton(): Boolean {
-        return true
+        return Permissions.check(player, "invex.command.endsee")
     }
 
     override fun onAnyClick(index: Int, type: ClickType?, action: net.minecraft.world.inventory.ClickType?): Boolean {
         target.`invex$saveData`()
         return super.onAnyClick(index, type, action)
+    }
+
+    open fun canModify(): Boolean {
+        return Permissions.check(target, InvExPermissions.IMMUNE_MODIFY)
+    }
+
+    fun conditionalSlotRedirect(index: Int, slot: Slot, condition: Boolean) {
+        if (condition) {
+            setSlotRedirect(index, slot)
+        } else {
+            setSlot(index, GuiElement(slot.item, ::onAnyClick))
+        }
     }
 
     protected companion object {
