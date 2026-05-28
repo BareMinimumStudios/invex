@@ -10,6 +10,7 @@ import net.minecraft.commands.Commands
 import net.minecraft.commands.arguments.GameProfileArgument
 import xyz.naomieow.invex.InvEx
 import xyz.naomieow.invex.InvExPermissions
+import xyz.naomieow.invex.gui.AccSeeGUI
 import xyz.naomieow.invex.gui.EndSeeGUI
 import xyz.naomieow.invex.gui.InvSeeGUI
 import xyz.naomieow.invex.gui.TrinketSeeGUI
@@ -65,12 +66,26 @@ object InvExCommands {
                 })
         )!!
 
+    val accsee = Commands.literal("accsee")
+        .requires(Permissions.require(InvExPermissions.ACCSEE_COMMAND, 2))
+        .then(
+            // TODO(naomieow): Custom ArgumentType that pulls from offline players too
+            Commands.argument("target", GameProfileArgument.gameProfile())
+                .suggests(SUGGEST_NAMES)
+                .executes(SeeCommand::executes { player, target ->
+                    AccSeeGUI(player, target)
+                })
+        )!!
+
     fun registerCommands() {
         CommandRegistrationCallback.EVENT.register { dispatcher, registry, env ->
             dispatcher.register(invsee)
             dispatcher.register(endsee)
             if (InvEx.isModLoaded("trinkets")) {
                 dispatcher.register(trinketsee)
+            }
+            if (InvEx.isModLoaded("accessories")) {
+                dispatcher.register(accsee)
             }
         }
     }

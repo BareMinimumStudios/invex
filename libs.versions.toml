@@ -9,6 +9,7 @@ opc = "2.0.0+1.20.1-beta.4-fabric"
 sgui = "1.2.2+1.20"
 permissionsapi = "0.2-SNAPSHOT"
 trinkets  = "3.7.2"
+accessories = "1.0.0-beta.47+1.20.1"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
@@ -19,3 +20,4 @@ opc = { module = "maven.modrinth:opc-directors-cut", version.ref = "opc" }
 sgui = { module = "eu.pb4:sgui", version.ref = "sgui" }
 permissionsapi = { module = "me.lucko:fabric-permissions-api", version.ref = "permissionsapi" }
 trinkets = { module = "dev.emi:trinkets", version.ref = "trinkets" }
+accessories = { module = "io.wispforest:accessories-fabric", version.ref = "accessories" }

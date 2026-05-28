@@ -108,6 +108,20 @@ abstract class SeeGUI(
             slot++
         }
 
+        if (showAccessoriesButton()) {
+            setSlot(
+                slot, GuiElementBuilder()
+                    .setItem(Items.DIAMOND_HELMET)
+                    .glow()
+                    .setName(Component.literal("Open Accessories"))
+                    .setCallback { i, type, action ->
+                        val gui = AccSeeGUI(player, target, this)
+                        gui.open()
+                    }
+            )
+            slot++
+        }
+
         for (i in slot..<this.size) {
             setSlot(i, GuiElementBuilder()
                 .setItem(Items.LIGHT_BLUE_STAINED_GLASS_PANE)
@@ -126,15 +140,20 @@ abstract class SeeGUI(
 
     open fun showTrinketsButton(): Boolean {
         return InvEx.isModLoaded("trinkets")
-               && Permissions.check(player, "invex.command.trinketsee", 2)
+                && Permissions.check(player, InvExPermissions.TRINKETSEE_COMMAND, 2)
+    }
+
+    open fun showAccessoriesButton(): Boolean {
+        return InvEx.isModLoaded("accessories")
+                && Permissions.check(player, InvExPermissions.ACCSEE_COMMAND, 2)
     }
 
     open fun showInventoryButton(): Boolean {
-        return Permissions.check(player, "invex.command.invsee", 2)
+        return Permissions.check(player, InvExPermissions.INVSEE_COMMAND, 2)
     }
 
     open fun showEnderChestButton(): Boolean {
-        return Permissions.check(player, "invex.command.endsee", 2)
+        return Permissions.check(player, InvExPermissions.ENDSEE_COMMAND, 2)
     }
 
     override fun onAnyClick(index: Int, type: ClickType?, action: net.minecraft.world.inventory.ClickType?): Boolean {

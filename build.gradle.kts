@@ -13,6 +13,8 @@ repositories {
 	maven("https://maven.nucleoid.xyz")
 	maven("https://maven.terraformersmc.com/")
 	maven("https://maven.ladysnake.org/releases")
+	maven("https://maven.wispforest.io/releases")
+	maven("https://maven.shedaniel.me/")
 }
 
 loom {
@@ -40,6 +42,7 @@ dependencies {
 	modImplementation(libs.permissionsapi)?.let(::include)
 
 	modCompileOnly(libs.trinkets)
+	modCompileOnly(libs.accessories)
 }
 
 tasks.processResources {

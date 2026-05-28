@@ -13,6 +13,10 @@ object InvExPermissions {
     const val TRINKETSEE_COMMAND: String = "invex.trinketsee.command"
     // Can modify in /trinketsee
     const val TRINKETSEE_MODIFY: String = "invex.trinketsee.modify"
+    // Can use /accsee
+    const val ACCSEE_COMMAND: String = "invex.accsee.command"
+    // Can modify in /accsee
+    const val ACCSEE_MODIFY: String = "invex.accsee.modify"
     // Is 'immune' to being modified
     const val IMMUNE_MODIFY: String = "invex.immune.modify"
     // Is 'immune' to being viewed
