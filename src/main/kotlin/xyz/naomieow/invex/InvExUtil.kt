@@ -8,11 +8,9 @@ import net.minecraft.world.level.storage.LevelResource
 import java.io.File
 
 fun Player.`invex$saveData`() {
-    InvEx.info("Saving data!")
     val dir = this.server?.getWorldPath(LevelResource.PLAYER_DATA_DIR)?.toFile()
     try {
         val tag = this.saveWithoutId(CompoundTag())
-        InvEx.info("Tag: $tag")
         val file = File.createTempFile("${this.stringUUID}.tmp", ".dat", dir)
         NbtIo.writeCompressed(tag, file)
         val current = File(dir, "${this.stringUUID}.dat")

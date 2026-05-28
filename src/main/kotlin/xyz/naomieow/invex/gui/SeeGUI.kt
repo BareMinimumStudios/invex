@@ -30,14 +30,15 @@ abstract class SeeGUI(
     override fun open(): Boolean {
         populate()
 
-        if (container.containerSize > maxSize) {
-            InvEx.warn("Container size is too large. Expected <=$maxSize but got ${container.containerSize}")
+        if (containerSize() > maxSize) {
+            InvEx.warn("Container size is too large. Expected <=$maxSize but got ${containerSize()}")
             return false
         }
 
-        var slot = container.containerSize + ((45 - container.containerSize) % 9)
+        var slot = containerSize() + ((45 - containerSize()) % 9)
+        InvEx.warn("Slot: $slot")
 
-        for (i in container.containerSize..<slot) {
+        for (i in containerSize()..<slot) {
             setSlot(i, GuiElementBuilder()
                 .setItem(Items.LIGHT_BLUE_STAINED_GLASS_PANE)
                 .setName(Component.literal(""))
@@ -70,7 +71,7 @@ abstract class SeeGUI(
             setSlot(slot, GuiElementBuilder()
                 .setItem(Items.CHEST)
                 .glow()
-                .setName(Component.literal("Inventory"))
+                .setName(Component.literal("Open Inventory"))
                 .setCallback { i, type, action ->
                     val gui = InvSeeGUI(player, target, this)
                     gui.open()
@@ -93,6 +94,20 @@ abstract class SeeGUI(
             slot++
         }
 
+        if (showTrinketsButton()) {
+            setSlot(
+                slot, GuiElementBuilder()
+                    .setItem(Items.GOLDEN_HELMET)
+                    .glow()
+                    .setName(Component.literal("Open Trinkets"))
+                    .setCallback { i, type, action ->
+                        val gui = TrinketSeeGUI(player, target, this)
+                        gui.open()
+                    }
+            )
+            slot++
+        }
+
         for (i in slot..<this.size) {
             setSlot(i, GuiElementBuilder()
                 .setItem(Items.LIGHT_BLUE_STAINED_GLASS_PANE)
@@ -104,6 +119,15 @@ abstract class SeeGUI(
     }
 
     abstract fun populate()
+
+    open fun containerSize(): Int {
+        return container.containerSize
+    }
+
+    open fun showTrinketsButton(): Boolean {
+        return InvEx.isModLoaded("trinkets")
+               && Permissions.check(player, "invex.command.trinketsee", 2)
+    }
 
     open fun showInventoryButton(): Boolean {
         return Permissions.check(player, "invex.command.invsee", 2)
@@ -119,7 +143,7 @@ abstract class SeeGUI(
     }
 
     open fun canModify(): Boolean {
-        return Permissions.check(target, InvExPermissions.IMMUNE_MODIFY, 3)
+        return !Permissions.check(target, InvExPermissions.IMMUNE_MODIFY, 3)
     }
 
     fun conditionalSlotRedirect(index: Int, slot: Slot, condition: Boolean) {
@@ -132,7 +156,7 @@ abstract class SeeGUI(
 
     protected companion object {
         protected fun getMenuType(size: Int): MenuType<*> {
-            var res = MenuType.GENERIC_9x6
+            var res = MenuType.GENERIC_9x1
 
             if (size >= 1) {
                 res = MenuType.GENERIC_9x2

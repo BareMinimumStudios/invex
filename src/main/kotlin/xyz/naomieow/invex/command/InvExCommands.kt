@@ -8,9 +8,11 @@ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback
 import net.minecraft.commands.CommandSourceStack
 import net.minecraft.commands.Commands
 import net.minecraft.commands.arguments.GameProfileArgument
+import xyz.naomieow.invex.InvEx
 import xyz.naomieow.invex.InvExPermissions
 import xyz.naomieow.invex.gui.EndSeeGUI
 import xyz.naomieow.invex.gui.InvSeeGUI
+import xyz.naomieow.invex.gui.TrinketSeeGUI
 
 object InvExCommands {
     // TODO(naomieow): Custom ArgumentType that pulls from offline players too instead of
@@ -45,17 +47,31 @@ object InvExCommands {
         .requires(Permissions.require(InvExPermissions.ENDSEE_COMMAND, 2))
         .then(
             // TODO(naomieow): Custom ArgumentType that pulls from offline players too
-        Commands.argument("target", GameProfileArgument.gameProfile())
-            .suggests(SUGGEST_NAMES)
-            .executes(SeeCommand::executes { player, target ->
-                EndSeeGUI(player, target)
-            })
+            Commands.argument("target", GameProfileArgument.gameProfile())
+                .suggests(SUGGEST_NAMES)
+                .executes(SeeCommand::executes { player, target ->
+                    EndSeeGUI(player, target)
+                })
+        )!!
+
+    val trinketsee = Commands.literal("trinketsee")
+        .requires(Permissions.require(InvExPermissions.TRINKETSEE_COMMAND, 2))
+        .then(
+            // TODO(naomieow): Custom ArgumentType that pulls from offline players too
+            Commands.argument("target", GameProfileArgument.gameProfile())
+                .suggests(SUGGEST_NAMES)
+                .executes(SeeCommand::executes { player, target ->
+                    TrinketSeeGUI(player, target)
+                })
         )!!
 
     fun registerCommands() {
         CommandRegistrationCallback.EVENT.register { dispatcher, registry, env ->
             dispatcher.register(invsee)
             dispatcher.register(endsee)
+            if (InvEx.isModLoaded("trinkets")) {
+                dispatcher.register(trinketsee)
+            }
         }
     }
 }

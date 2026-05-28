@@ -11,6 +11,8 @@ group = "xyz.naomieow.invex"
 repositories {
 	maven("https://api.modrinth.com/maven")
 	maven("https://maven.nucleoid.xyz")
+	maven("https://maven.terraformersmc.com/")
+	maven("https://maven.ladysnake.org/releases")
 }
 
 loom {
@@ -36,6 +38,8 @@ dependencies {
 	modImplementation(libs.opc)?.let(::include)
 	modImplementation(libs.sgui)?.let(::include)
 	modImplementation(libs.permissionsapi)?.let(::include)
+
+	modCompileOnly(libs.trinkets)
 }
 
 tasks.processResources {
