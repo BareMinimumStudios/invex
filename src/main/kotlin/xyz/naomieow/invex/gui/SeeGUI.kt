@@ -1,0 +1,140 @@
+package xyz.naomieow.invex.gui
+
+import eu.pb4.sgui.api.ClickType
+import eu.pb4.sgui.api.elements.GuiElementBuilder
+import eu.pb4.sgui.api.gui.SimpleGui
+import net.minecraft.network.chat.Component
+import net.minecraft.server.level.ServerPlayer
+import net.minecraft.world.Container
+import net.minecraft.world.inventory.MenuType
+import net.minecraft.world.item.Items
+import xyz.naomieow.invex.InvEx
+import xyz.naomieow.invex.`invex$saveData`
+
+abstract class SeeGUI(
+    player: ServerPlayer,
+    val target: ServerPlayer,
+    val container: Container,
+    val returnGui: SimpleGui? = null
+): SimpleGui(
+    getMenuType(container.containerSize),
+    player,
+    false
+) {
+    protected val maxSize = 45
+
+    override fun open(): Boolean {
+        populate()
+
+        if (container.containerSize > maxSize) {
+            InvEx.warn("Container size is too large. Expected <=$maxSize but got ${container.containerSize}")
+            return false
+        }
+
+        var slot = container.containerSize + ((45 - container.containerSize) % 9)
+
+        for (i in container.containerSize..<slot) {
+            setSlot(i, GuiElementBuilder()
+                .setItem(Items.LIGHT_BLUE_STAINED_GLASS_PANE)
+                .setName(Component.literal(""))
+            )
+        }
+
+        setSlot(slot, GuiElementBuilder()
+            .setItem(Items.BARRIER)
+            .glow()
+            .setName(Component.literal("Exit"))
+            .setCallback { i, type, action ->
+                this.close()
+            }
+        )
+        slot++
+
+        if (returnGui != null) {
+            setSlot(slot, GuiElementBuilder()
+                .setItem(Items.STRUCTURE_VOID)
+                .glow()
+                .setName(Component.literal("Return"))
+                .setCallback { i, type, action ->
+                    returnGui.open()
+                }
+            )
+            slot++
+        }
+
+        if (showInventoryButton()) {
+            setSlot(slot, GuiElementBuilder()
+                .setItem(Items.CHEST)
+                .glow()
+                .setName(Component.literal("Inventory"))
+                .setCallback { i, type, action ->
+                    val gui = InvSeeGUI(player, target, this)
+                    gui.open()
+                }
+            )
+            slot++
+        }
+
+        if (showEnderChestButton()) {
+            setSlot(
+                slot, GuiElementBuilder()
+                    .setItem(Items.ENDER_CHEST)
+                    .glow()
+                    .setName(Component.literal("Open Ender Chest"))
+                    .setCallback { i, type, action ->
+                        val gui = EndSeeGUI(player, target, this)
+                        gui.open()
+                    }
+            )
+            slot++
+        }
+
+        for (i in slot..<this.size) {
+            setSlot(i, GuiElementBuilder()
+                .setItem(Items.LIGHT_BLUE_STAINED_GLASS_PANE)
+                .setName(Component.literal(""))
+            )
+        }
+
+        return super.open()
+    }
+
+    abstract fun populate()
+
+    open fun showInventoryButton(): Boolean {
+        return true
+    }
+
+    open fun showEnderChestButton(): Boolean {
+        return true
+    }
+
+    override fun onAnyClick(index: Int, type: ClickType?, action: net.minecraft.world.inventory.ClickType?): Boolean {
+        target.`invex$saveData`()
+        return super.onAnyClick(index, type, action)
+    }
+
+    protected companion object {
+        protected fun getMenuType(size: Int): MenuType<*> {
+            var res = MenuType.GENERIC_9x6
+
+            if (size >= 1) {
+                res = MenuType.GENERIC_9x2
+            }
+            if (size >= 10) {
+                res = MenuType.GENERIC_9x3
+            }
+            if (size >= 19) {
+                res = MenuType.GENERIC_9x4
+            }
+            if (size >= 28) {
+                res = MenuType.GENERIC_9x5
+            }
+            if (size >= 37) {
+                res = MenuType.GENERIC_9x6
+            }
+
+            return res
+        }
+    }
+}
