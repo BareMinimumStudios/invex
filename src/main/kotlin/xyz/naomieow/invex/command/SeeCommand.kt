@@ -1,16 +1,15 @@
 package xyz.naomieow.invex.command
 
 import com.mojang.brigadier.context.CommandContext
-import com.mojang.serialization.Dynamic
 import me.lucko.fabric.api.permissions.v0.Permissions
 import net.minecraft.commands.CommandSourceStack
 import net.minecraft.commands.arguments.GameProfileArgument
-import net.minecraft.nbt.NbtOps
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerPlayer
-import net.minecraft.world.level.dimension.DimensionType
 import xyz.naomieow.invex.InvExPermissions
 import xyz.naomieow.invex.gui.SeeGUI
+import kotlin.collections.first
+import xyz.naomieow.invex.getOfflinePlayer
 
 object SeeCommand {
     fun executes(guiFn: (player: ServerPlayer, target: ServerPlayer) -> SeeGUI): (CommandContext<CommandSourceStack>) -> Int {
@@ -23,26 +22,7 @@ object SeeCommand {
             }
 
             val targetPlayerProfile = profiles.first()
-            var targetPlayer = ctx.source.server.playerList.getPlayerByName(targetPlayerProfile.name)
-
-            if (targetPlayer == null) {
-                targetPlayer = ctx.source.server.playerList.getPlayerForLogin(targetPlayerProfile)
-                val tag = ctx.source.server.playerList.load(targetPlayer)
-                if (tag != null) {
-                    val level = ctx.source.server.getLevel(
-                        DimensionType.parseLegacy(
-                            Dynamic(
-                                NbtOps.INSTANCE,
-                                tag.get("Dimension")
-                            )
-                        ).result().get()
-                    )
-
-                    if (level != null) {
-                        targetPlayer.setLevel(level)
-                    }
-                }
-            }
+            val targetPlayer = ctx.source.server.getOfflinePlayer(targetPlayerProfile)!!
 
             if (Permissions.check(targetPlayer, InvExPermissions.IMMUNE_VIEW, 3)) {
                 ctx.source.sendFailure(Component.literal("Player ${targetPlayer.name.string} is immune to being viewed."))

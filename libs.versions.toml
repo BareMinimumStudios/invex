@@ -1,23 +1,39 @@
 [versions]
-invex = "1.0.0"
-minecraft = "1.20.1"
-kotlin = "2.3.21"
+# Common
+cloche = "0.18.4"
+kotlin = "2.2.21"
 fabric-loader = "0.19.2"
-fabric-kotlin = "1.13.11+kotlin.2.3.21"
-fabric-api = "0.92.9+1.20.1"
-opc = "2.0.0+1.20.1-beta.4-fabric"
-sgui = "1.2.2+1.20"
-permissionsapi = "0.2-SNAPSHOT"
-trinkets  = "3.7.2"
-accessories = "1.0.0-beta.47+1.20.1"
+fabric-kotlin = "1.13.7+kotlin.2.2.21"
+# 1.20.1
+fabric-api-1201 = "0.92.9"
+opc-1201 = "2.0.0+1.20.1-beta.4-fabric"
+sgui-1201 = "1.2.2+1.20"
+permissionsapi-1201 = "0.2-SNAPSHOT"
+trinkets-1201 = "3.7.2"
+accessories-1201 = "1.0.0-beta.47+1.20.1"
+# 1.21.1
+fabric-api-1211 = "0.116.12"
+opc-1211 = "2.0.0+1.21-beta.2-fabric"
+sgui-1211 = "1.6.1+1.21.1"
+permissionsapi-1211 = "0.3.3"
+trinkets-1211 = "3.10.0"
+accessories-1211 = "1.1.0-beta.53+1.21.1"
+
+[plugins]
+cloche = { id = "earth.terrarium.cloche", version.ref = "cloche" }
 
 [libraries]
-minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
+# Common
 fabric-kotlin = { module = "net.fabricmc:fabric-language-kotlin", version.ref = "fabric-kotlin" }
-fabric-api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric-api" }
-fabric-loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric-loader" }
-opc = { module = "maven.modrinth:opc-directors-cut", version.ref = "opc" }
-sgui = { module = "eu.pb4:sgui", version.ref = "sgui" }
-permissionsapi = { module = "me.lucko:fabric-permissions-api", version.ref = "permissionsapi" }
-trinkets = { module = "dev.emi:trinkets", version.ref = "trinkets" }
-accessories = { module = "io.wispforest:accessories-fabric", version.ref = "accessories" }
+# 1.20.1
+opc-1201 = { module = "maven.modrinth:opc-directors-cut", version.ref = "opc-1201" }
+sgui-1201 = { module = "eu.pb4:sgui", version.ref = "sgui-1201" }
+permissionsapi-1201 = { module = "me.lucko:fabric-permissions-api", version.ref = "permissionsapi-1201" }
+trinkets-1201 = { module = "dev.emi:trinkets", version.ref = "trinkets-1201" }
+accessories-1201 = { module = "io.wispforest:accessories-fabric", version.ref = "accessories-1201" }
+# 1.21.1
+opc-1211 = { module = "maven.modrinth:opc-directors-cut", version.ref = "opc-1211" }
+sgui-1211 = { module = "eu.pb4:sgui", version.ref = "sgui-1211" }
+permissionsapi-1211 = { module = "me.lucko:fabric-permissions-api", version.ref = "permissionsapi-1211" }
+trinkets-1211 = { module = "dev.emi:trinkets", version.ref = "trinkets-1211" }
+accessories-1211 = { module = "io.wispforest:accessories-fabric", version.ref = "accessories-1211" }

@@ -8,6 +8,7 @@ import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.inventory.Slot
 import xyz.naomieow.invex.InvExPermissions
+import kotlin.collections.forEach
 
 class AccSeeGUI(
     player: ServerPlayer,

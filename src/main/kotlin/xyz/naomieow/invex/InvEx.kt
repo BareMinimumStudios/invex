@@ -6,7 +6,7 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import xyz.naomieow.invex.command.InvExCommands
 
-const val MOD_ID: String = "invex"
+const val MOD_ID: String = "assets/invex"
 const val MOD_NAME: String = "InvEx"
 
 object InvEx :

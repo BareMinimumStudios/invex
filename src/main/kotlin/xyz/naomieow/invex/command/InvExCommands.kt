@@ -14,6 +14,9 @@ import xyz.naomieow.invex.gui.AccSeeGUI
 import xyz.naomieow.invex.gui.EndSeeGUI
 import xyz.naomieow.invex.gui.InvSeeGUI
 import xyz.naomieow.invex.gui.TrinketSeeGUI
+import kotlin.collections.filter
+import kotlin.collections.forEach
+import kotlin.text.startsWith
 
 object InvExCommands {
     // TODO(naomieow): Custom ArgumentType that pulls from offline players too instead of

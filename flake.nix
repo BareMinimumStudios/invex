@@ -13,12 +13,12 @@
         });
   in {
     devShells = forEachSupportedSystem ({pkgs}: let
+      java17 = pkgs.jetbrains.jdk-no-jcef-17;
       java21 = pkgs.jetbrains.jdk-no-jcef-21;
-      java25 = pkgs.jetbrains.jdk-no-jcef;
 
       nativeBuildInputs = [
+        java17
         java21
-        java25
       ];
 
       buildInputs = with pkgs; [
@@ -34,8 +34,8 @@
         env = {
           LD_LIBRARY_PATH = lib.makeLibraryPath buildInputs;
           JAVA_HOME = "${java21.home}";
+          JDK17 = "${java17.home}";
           JDK21 = "${java21.home}";
-          JDK25 = "${java25.home}";
         };
       };
     });
