@@ -132,6 +132,30 @@ abstract class SeeGUI(
         return super.open()
     }
 
+    override fun onAnyClick(
+        index: Int,
+        type: ClickType?,
+        action: net.minecraft.world.inventory.ClickType?
+    ): Boolean {
+        val res = canModify()
+        if (res) {
+            target.`invex$saveData`()
+        }
+        return res
+    }
+
+    override fun close() {
+        val res = canModify()
+        if (res) {
+            target.`invex$saveData`()
+        }
+    }
+
+    override fun onTick() {
+        populate()
+        super.onTick()
+    }
+
     abstract fun populate()
 
     open fun containerSize(): Int {
@@ -156,13 +180,12 @@ abstract class SeeGUI(
         return Permissions.check(player, InvExPermissions.ENDSEE_COMMAND, 2)
     }
 
-    override fun onAnyClick(index: Int, type: ClickType?, action: net.minecraft.world.inventory.ClickType?): Boolean {
-        target.`invex$saveData`()
-        return super.onAnyClick(index, type, action)
-    }
-
     open fun canModify(): Boolean {
-        return !Permissions.check(target, InvExPermissions.IMMUNE_MODIFY, 3)
+        var res = false
+        Permissions.check(target.uuid, InvExPermissions.IMMUNE_MODIFY).thenAcceptAsync {
+             res = it
+        }
+        return !res
     }
 
     fun conditionalSlotRedirect(index: Int, slot: Slot, condition: Boolean) {
