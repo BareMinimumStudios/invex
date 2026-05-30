@@ -22,7 +22,23 @@ object SeeCommand {
             }
 
             val targetPlayerProfile = profiles.first()
-            val targetPlayer = ctx.source.server.getOfflinePlayer(targetPlayerProfile)!!
+
+            if (targetPlayerProfile == null) {
+                ctx.source.sendFailure(Component.literal("Given player not found."))
+                return@cb 0
+            }
+
+            val targetPlayer = ctx.source.server.getOfflinePlayer(targetPlayerProfile)
+
+            if (targetPlayer == null) {
+                ctx.source.sendFailure(Component.literal("Data for player ${targetPlayerProfile.name} not found."))
+                return@cb 0
+            }
+
+            if (ctx.source.player == null) {
+                ctx.source.sendFailure(Component.literal("Attempted to call command from non-player environment."))
+                return@cb 0
+            }
 
             if (Permissions.check(targetPlayer, InvExPermissions.IMMUNE_VIEW, 3)) {
                 ctx.source.sendFailure(Component.literal("Player ${targetPlayer.name.string} is immune to being viewed."))
