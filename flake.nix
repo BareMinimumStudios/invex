@@ -13,7 +13,7 @@
         });
   in {
     devShells = forEachSupportedSystem ({pkgs}: let
-      java17 = pkgs.jetbrains.jdk-no-jcef-17;
+      java17 = pkgs.openjdk17;
       java21 = pkgs.jetbrains.jdk-no-jcef-21;
 
       nativeBuildInputs = [
