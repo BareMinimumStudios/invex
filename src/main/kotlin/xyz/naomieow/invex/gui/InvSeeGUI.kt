@@ -17,12 +17,12 @@ class InvSeeGUI(
         title = Component.literal("Viewing ${target.name.string}'s Inventory")
         for (i in 0..<target.inventory.containerSize) {
             if (Inventory.isHotbarSlot(i)) {
-                conditionalSlotRedirect(i + 27, Slot(target.inventory, i, 0, 0), canModify())
+                setSlotRedirect(i + 27, Slot(target.inventory, i, 0, 0))
             } else if (i >=target.inventory.containerSize - 5) {
                 // Check if armour/offhand slot
-                conditionalSlotRedirect(i, Slot(target.inventory, i, 0, 0), canModify())
+                setSlotRedirect(i, Slot(target.inventory, i, 0, 0))
             }else {
-                conditionalSlotRedirect(i - 9, Slot(target.inventory, i, 0, 0), canModify())
+                setSlotRedirect(i - 9, Slot(target.inventory, i, 0, 0))
             }
         }
     }

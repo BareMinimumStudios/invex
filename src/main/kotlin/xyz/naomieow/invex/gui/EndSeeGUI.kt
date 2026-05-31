@@ -15,7 +15,7 @@ class EndSeeGUI(
     override fun populate() {
         title = Component.literal("Viewing ${target.name.string}'s Ender Chest")
         for (i in 0..<target.enderChestInventory.containerSize) {
-            conditionalSlotRedirect(i, Slot(target.enderChestInventory, i, 0, 0), canModify())
+            setSlotRedirect(i, Slot(target.enderChestInventory, i, 0, 0))
         }
     }
 

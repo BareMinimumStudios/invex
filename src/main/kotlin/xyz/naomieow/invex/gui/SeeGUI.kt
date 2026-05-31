@@ -137,23 +137,20 @@ abstract class SeeGUI(
         type: ClickType?,
         action: net.minecraft.world.inventory.ClickType?
     ): Boolean {
-        val res = canModify()
-        if (res) {
+        if (canModify()) {
             target.`invex$saveData`()
         }
-        return res
+        if (index <= virtualSize) {
+            return canModify()
+        }
+        // Always can modify own inventory
+        return true
     }
 
     override fun close() {
-        val res = canModify()
-        if (res) {
+        if (canModify()) {
             target.`invex$saveData`()
         }
-    }
-
-    override fun onTick() {
-        populate()
-        super.onTick()
     }
 
     abstract fun populate()
@@ -186,14 +183,6 @@ abstract class SeeGUI(
              res = it
         }
         return !res
-    }
-
-    fun conditionalSlotRedirect(index: Int, slot: Slot, condition: Boolean) {
-        if (condition) {
-            setSlotRedirect(index, slot)
-        } else {
-            setSlot(index, GuiElement(slot.item, ::onAnyClick))
-        }
     }
 
     protected companion object {

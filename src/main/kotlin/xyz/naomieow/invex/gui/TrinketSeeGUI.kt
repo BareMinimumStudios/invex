@@ -34,7 +34,7 @@ class TrinketSeeGUI(
                 for (i in 0..<inventory.containerSize) {
                     InvEx.info("i: $i")
                     InvEx.info("slot: $slot")
-                    conditionalSlotRedirect(slot, Slot(inventory, i, 0, 0), canModify())
+                    setSlotRedirect(slot, Slot(inventory, i, 0, 0))
                     slot++
                 }
             }

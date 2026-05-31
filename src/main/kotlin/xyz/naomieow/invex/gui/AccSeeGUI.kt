@@ -30,7 +30,7 @@ class AccSeeGUI(
 
         capability.containers.values.forEach { container ->
            for (i in 0..<container.accessories.containerSize) {
-               conditionalSlotRedirect(slot, Slot(container.accessories, i, 0, 0), canModify())
+               setSlotRedirect(slot, Slot(container.accessories, i, 0, 0))
                slot++
            }
         }
