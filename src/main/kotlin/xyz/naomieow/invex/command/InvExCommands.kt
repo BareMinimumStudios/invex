@@ -14,6 +14,7 @@ import xyz.naomieow.invex.gui.AccSeeGUI
 import xyz.naomieow.invex.gui.EndSeeGUI
 import xyz.naomieow.invex.gui.InvSeeGUI
 import xyz.naomieow.invex.gui.TrinketSeeGUI
+import xyz.naomieow.invex.trinketsCompatLoaded
 import kotlin.collections.filter
 import kotlin.collections.forEach
 import kotlin.text.startsWith
@@ -84,7 +85,7 @@ object InvExCommands {
         CommandRegistrationCallback.EVENT.register { dispatcher, registry, env ->
             dispatcher.register(invsee)
             dispatcher.register(endsee)
-            if (InvEx.isModLoaded("trinkets")) {
+            if (InvEx.isModLoaded("trinkets") && !trinketsCompatLoaded()) {
                 dispatcher.register(trinketsee)
             }
             if (InvEx.isModLoaded("accessories")) {

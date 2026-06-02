@@ -51,3 +51,7 @@ actual fun MinecraftServer.getOfflinePlayer(gameProfile: GameProfile): ServerPla
 
     return targetPlayer
 }
+
+actual fun trinketsCompatLoaded(): Boolean {
+    return InvEx.isModLoaded("tclayer")
+}

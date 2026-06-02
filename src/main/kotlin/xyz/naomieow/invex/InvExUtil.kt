@@ -7,3 +7,4 @@ import net.minecraft.world.entity.player.Player
 
 expect fun Player.`invex$saveData`()
 expect fun MinecraftServer.getOfflinePlayer(gameProfile: GameProfile): ServerPlayer?
+expect fun trinketsCompatLoaded(): Boolean

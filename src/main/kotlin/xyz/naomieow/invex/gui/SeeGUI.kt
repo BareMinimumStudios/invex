@@ -12,6 +12,7 @@ import net.minecraft.world.item.Items
 import xyz.naomieow.invex.InvEx
 import xyz.naomieow.invex.InvExPermissions
 import xyz.naomieow.invex.`invex$saveData`
+import xyz.naomieow.invex.trinketsCompatLoaded
 
 abstract class SeeGUI(
     player: ServerPlayer,
@@ -172,6 +173,7 @@ abstract class SeeGUI(
 
     open fun showTrinketsButton(): Boolean {
         return InvEx.isModLoaded("trinkets")
+                && !trinketsCompatLoaded()
                 && Permissions.check(player, InvExPermissions.TRINKETSEE_COMMAND, 2)
     }
 
