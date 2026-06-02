@@ -17,31 +17,48 @@ object SeeCommand {
             val profiles = GameProfileArgument.getGameProfiles(ctx, "target")
             // Really shitty implementation
             if (profiles.size > 1) {
-                ctx.source.sendFailure(Component.literal("Only one player is allowed, but the provided selector allows more than one"))
+                ctx.source.sendFailure(Component.translatableWithFallback(
+                    "invex.command.error.one_player",
+                    "Only one player is allowed, but the provided selector allows more than one"
+                ))
                 return@cb 0
             }
 
             val targetPlayerProfile = profiles.first()
 
             if (targetPlayerProfile == null) {
-                ctx.source.sendFailure(Component.literal("Given player not found."))
+                ctx.source.sendFailure(Component.translatableWithFallback(
+                    "invex.command.error.player_not_found",
+                    "Given player not found"
+                ))
                 return@cb 0
             }
 
             val targetPlayer = ctx.source.server.getOfflinePlayer(targetPlayerProfile)
 
             if (targetPlayer == null) {
-                ctx.source.sendFailure(Component.literal("Data for player ${targetPlayerProfile.name} not found."))
+                ctx.source.sendFailure(Component.translatableWithFallback(
+                    "invex.command.data_not_found",
+                    "Data for player %s not found",
+                    targetPlayerProfile.name
+                ))
                 return@cb 0
             }
 
             if (ctx.source.player == null) {
-                ctx.source.sendFailure(Component.literal("Attempted to call command from non-player environment."))
+                ctx.source.sendFailure(Component.translatableWithFallback(
+                    "invex.command.error.non_player_env",
+                    "Attempted to call command from non-player environment"
+                ))
                 return@cb 0
             }
 
             if (Permissions.check(targetPlayer, InvExPermissions.IMMUNE_VIEW, 3)) {
-                ctx.source.sendFailure(Component.literal("Player ${targetPlayer.name.string} is immune to being viewed."))
+                ctx.source.sendFailure(Component.translatableWithFallback(
+                    "invex.command.error.immune",
+                    "%s is immune to being viewed",
+                    targetPlayer.name.string
+                ))
                 return@cb 0
             }
 
@@ -49,7 +66,10 @@ object SeeCommand {
             if (gui.open()) {
                 return@cb 1
             }
-            ctx.source.sendFailure(Component.literal("Failed to open menu."))
+            ctx.source.sendFailure(Component.translatableWithFallback(
+                "invex.command.error.gui_fail",
+                "Failed to open menu"
+            ))
             return@cb 0
         }
     }

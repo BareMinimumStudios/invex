@@ -46,7 +46,7 @@ abstract class SeeGUI(
         setSlot(slot, GuiElementBuilder()
             .setItem(Items.BARRIER)
             .glow()
-            .setName(Component.literal("Exit"))
+            .setName(Component.translatableWithFallback("invex.exit", "Exit"))
             .setCallback { i, type, action ->
                 this.close()
             }
@@ -57,7 +57,7 @@ abstract class SeeGUI(
             setSlot(slot, GuiElementBuilder()
                 .setItem(Items.STRUCTURE_VOID)
                 .glow()
-                .setName(Component.literal("Return"))
+                .setName(Component.translatableWithFallback("invex.return", "Return"))
                 .setCallback { i, type, action ->
                     returnGui.open()
                 }
@@ -69,7 +69,10 @@ abstract class SeeGUI(
             setSlot(slot, GuiElementBuilder()
                 .setItem(Items.CHEST)
                 .glow()
-                .setName(Component.literal("Open Inventory"))
+                .setName(Component.translatableWithFallback(
+                    "invex.open.inventory",
+                    "Open Inventory"
+                ))
                 .setCallback { i, type, action ->
                     val gui = InvSeeGUI(player, target, this)
                     gui.open()
@@ -83,7 +86,10 @@ abstract class SeeGUI(
                 slot, GuiElementBuilder()
                     .setItem(Items.ENDER_CHEST)
                     .glow()
-                    .setName(Component.literal("Open Ender Chest"))
+                    .setName(Component.translatableWithFallback(
+                        "invex.open.ender_chest",
+                        "Open Ender Chest"
+                    ))
                     .setCallback { i, type, action ->
                         val gui = EndSeeGUI(player, target, this)
                         gui.open()
@@ -97,7 +103,10 @@ abstract class SeeGUI(
                 slot, GuiElementBuilder()
                     .setItem(Items.GOLDEN_HELMET)
                     .glow()
-                    .setName(Component.literal("Open Trinkets"))
+                    .setName(Component.translatableWithFallback(
+                        "invex.open.trinkets",
+                        "Open Trinkets"
+                    ))
                     .setCallback { i, type, action ->
                         val gui = TrinketSeeGUI(player, target, this)
                         gui.open()
@@ -111,7 +120,10 @@ abstract class SeeGUI(
                 slot, GuiElementBuilder()
                     .setItem(Items.DIAMOND_HELMET)
                     .glow()
-                    .setName(Component.literal("Open Accessories"))
+                    .setName(Component.translatableWithFallback(
+                        "invex.open.accessories",
+                        "Open Accessories"
+                    ))
                     .setCallback { i, type, action ->
                         val gui = AccSeeGUI(player, target, this)
                         gui.open()
