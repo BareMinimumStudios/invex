@@ -26,6 +26,7 @@ abstract class SeeGUI(
     protected val maxSize = 45
 
     override fun open(): Boolean {
+        title = Component.literal("${target.name.string}")
         populate()
 
         if (containerSize() > maxSize) {
@@ -144,10 +145,11 @@ abstract class SeeGUI(
         return true
     }
 
-    override fun close() {
+    override fun onClose() {
         if (canModify()) {
             target.`invex$saveData`()
         }
+        super.onClose()
     }
 
     abstract fun populate()

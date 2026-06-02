@@ -4,7 +4,6 @@ import dev.emi.trinkets.api.TrinketComponent
 import dev.emi.trinkets.api.TrinketsApi
 import eu.pb4.sgui.api.gui.SimpleGui
 import me.lucko.fabric.api.permissions.v0.Permissions
-import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.inventory.Slot
@@ -26,7 +25,6 @@ class TrinketSeeGUI(
     val component = TrinketsApi.getTrinketComponent(target).get()
 
     override fun populate() {
-        title = Component.literal("Viewing ${target.name.string}'s Trinkets")
         var slot = 0
         component.inventory.values.forEach { map ->
             map.values.forEach { inventory ->

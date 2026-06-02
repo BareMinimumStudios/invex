@@ -3,7 +3,6 @@ package xyz.naomieow.invex.gui
 import eu.pb4.sgui.api.gui.SimpleGui
 import io.wispforest.accessories.api.AccessoriesCapability
 import me.lucko.fabric.api.permissions.v0.Permissions
-import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.inventory.Slot
@@ -25,7 +24,6 @@ class AccSeeGUI(
     val capability = AccessoriesCapability.get(target)!!
 
     override fun populate() {
-        title = Component.literal("Viewing ${target.name.string}'s Accessories")
         var slot = 0
 
         capability.containers.values.forEach { container ->

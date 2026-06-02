@@ -2,7 +2,6 @@ package xyz.naomieow.invex.gui
 
 import eu.pb4.sgui.api.gui.SimpleGui
 import me.lucko.fabric.api.permissions.v0.Permissions
-import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.inventory.Slot
@@ -14,7 +13,6 @@ class InvSeeGUI(
     returnGui: SimpleGui? = null
 ): SeeGUI(player, target, target.inventory, returnGui) {
     override fun populate()  {
-        title = Component.literal("Viewing ${target.name.string}'s Inventory")
         for (i in 0..<target.inventory.containerSize) {
             if (Inventory.isHotbarSlot(i)) {
                 setSlotRedirect(i + 27, Slot(target.inventory, i, 0, 0))
