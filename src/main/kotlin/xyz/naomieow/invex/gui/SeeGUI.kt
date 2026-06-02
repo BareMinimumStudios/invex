@@ -1,7 +1,6 @@
 package xyz.naomieow.invex.gui
 
 import eu.pb4.sgui.api.ClickType
-import eu.pb4.sgui.api.elements.GuiElement
 import eu.pb4.sgui.api.elements.GuiElementBuilder
 import eu.pb4.sgui.api.gui.SimpleGui
 import me.lucko.fabric.api.permissions.v0.Permissions
@@ -9,7 +8,6 @@ import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.Container
 import net.minecraft.world.inventory.MenuType
-import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.Items
 import xyz.naomieow.invex.InvEx
 import xyz.naomieow.invex.InvExPermissions
@@ -36,7 +34,6 @@ abstract class SeeGUI(
         }
 
         var slot = containerSize() + ((45 - containerSize()) % 9)
-        InvEx.warn("Slot: $slot")
 
         for (i in containerSize()..<slot) {
             setSlot(i, GuiElementBuilder()

@@ -8,7 +8,6 @@ import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.inventory.Slot
-import xyz.naomieow.invex.InvEx
 import xyz.naomieow.invex.InvExPermissions
 import kotlin.collections.forEach
 
@@ -32,8 +31,6 @@ class TrinketSeeGUI(
         component.inventory.values.forEach { map ->
             map.values.forEach { inventory ->
                 for (i in 0..<inventory.containerSize) {
-                    InvEx.info("i: $i")
-                    InvEx.info("slot: $slot")
                     setSlotRedirect(slot, Slot(inventory, i, 0, 0))
                     slot++
                 }

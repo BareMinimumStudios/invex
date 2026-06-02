@@ -15,7 +15,7 @@ accessories-1201 = "1.0.0-beta.47+1.20.1"
 fabric-api-1211 = "0.116.12"
 opc-1211 = "2.0.0+1.21-beta.2-fabric"
 sgui-1211 = "1.6.1+1.21.1"
-permissionsapi-1211 = "0.3.3"
+permissionsapi-1211 = "0.3.1"
 trinkets-1211 = "3.10.0"
 accessories-1211 = "1.1.0-beta.53+1.21.1"
 
