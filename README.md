@@ -35,15 +35,16 @@ InvEx is a server-side inventory viewer/explorer with support for offline player
 InvEx makes use of the common Permissions API which can be configured using mods such as [LuckPerms](https://modrinth.com/mod/luckperms), but it also has support for Minecraft's built in [permission levels](https://minecraft.wiki/w/Permission_level) for servers that aren't using those mods.
 
 <details>
-  <summary>Vanilla</summary>
-  Anyone with OP permission level 2 will be able to view inventories, but not modify them.
-  
-  Anyone with OP permission level 3 or higher will be able to modify inventories, and is immune to being viewed/modified.
+  <summary>Permissions API</summary>
+  <p>All the permission IDs and their relevant descriptions can be seen in <a href="https://github.com/BareMinimumStudios/invex/blob/main/src/main/kotlin/xyz/naomieow/invex/InvExPermissions.kt">InvExPermissions.kt</a>.</p>
 </details>
 
 <details>
-  <summary>Permission Strings</summary>
-  All the permissions and their relevant descriptions can be seen in [InvExPermissions.kt](src/main/kotlin/xyz/naomieow/invex/InvExPermissions.kt).
+  <summary>Vanilla</summary>
+  <ul>
+  <li>Anyone with OP permission level 2 will be able to view inventories, but not modify them.</li>
+  <li>Anyone with OP permission level 3 or higher will be able to modify inventories, and is immune to being viewed/modified.</li>
+  </ul>
 </details>
 
 ## License
