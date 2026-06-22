@@ -19,6 +19,7 @@
       nativeBuildInputs = [
         java17
         java21
+        pkgs.act
       ];
 
       buildInputs = with pkgs; [
