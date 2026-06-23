@@ -1,12 +1,12 @@
 # InvEx
 
 <p style="text-align: center">
-  <!--<a href="">
+  <a href="https://www.curseforge.com/minecraft/mc-mods/invex/">
     <img alt="curseforge" height="40" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/available/curseforge_vector.svg">
   </a>
-  <a href="">
+  <a href="https://modrinth.com/project/invex">
     <img alt="modrinth" height="40" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/available/modrinth_vector.svg">
-  </a>-->
+  </a>
   <img alt="fabric" height="40" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/supported/fabric_vector.svg">
   <a href="https://discord.gg/pcRw79hwey">
     <img alt="discord-plural" height="40" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/social/discord-plural_vector.svg">
